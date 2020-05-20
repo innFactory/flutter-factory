@@ -1,12 +1,17 @@
-const { readFileSync, existsSync } = require('fs');
-const { safeLoad } = require('js-yaml');
-const { resolve } = require('path');
+import { readFileSync, existsSync } from 'fs';
+import { safeLoad } from 'js-yaml';
+import { resolve } from 'path';
 
-const isFlutterProject = (directory) => {
+export const isFlutterProject = (directory: string) => {
 	return existsSync(resolve(directory, './pubspec.yaml'));
 };
 
-const readPubspec = (directory) => {
+export interface Pubspec {
+	name: string;
+	description: string;
+}
+
+export const readPubspec = (directory: string): Pubspec => {
 	const pubspecFile = readFileSync(resolve(directory, './pubspec.yaml'), 'utf-8');
 	const pubspec = safeLoad(pubspecFile);
 
@@ -18,6 +23,3 @@ const readPubspec = (directory) => {
 		description: description,
 	};
 };
-
-exports.isFlutterProject = isFlutterProject;
-exports.readPubspec = readPubspec;

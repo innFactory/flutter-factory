@@ -1,14 +1,16 @@
-const { exit } = require('process');
-const { android } = require('./android');
-const { initCli } = require('../helper/general');
-const { promptProject } = require('./firebaseUtil');
-const { ios } = require('./ios');
+import { exit } from 'process';
+import { initCli } from '../helper/generalUtil';
+import { promptProject } from './firebaseUtil';
+import { android } from './android';
+import { ios } from './ios';
+import program from 'commander';
+// import { androidCommand } from ('./android')
+// import { iosCommand } from ('./ios')
 
-const setupCommand = (firebase) => {
-	firebase
-		.command('firebase:setup')
+export const firebaseCommand = (program: program.Command) => {
+	program
+		.command('firebase')
 		.description('Create Ios and Android Firebase app and download configuration files.')
-		.option('-p --path <path>', 'Path of the Flutter project to use')
 		.option('-f --firebase <name>', 'The name of the Firebase project')
 		.option('-sa --skip-android', 'Skip the Android app creation')
 		.option('-an --android-name <name>', 'The name of the Android app in Firebase')
@@ -18,7 +20,7 @@ const setupCommand = (firebase) => {
 		.option('-ia --ios-appstore <name>', 'The Ios Appstore Id for Firebase')
 		.option('-si --skip-ios', 'Skip the Ios app creation')
 		.action(async (options) => {
-			const { directory, pubspec } = initCli(options.path);
+			const { directory, pubspec } = initCli(program.opts()['path']);
 
 			if (options.skipAndroid && options.skipIos) {
 				console.error("You can't skip both the Ios and Android app creation.");
@@ -38,4 +40,3 @@ const setupCommand = (firebase) => {
 			}
 		});
 };
-exports.setupCommand = setupCommand;
