@@ -1,8 +1,7 @@
-import { google } from './google';
-import { initCli, promptIfUndefined, promptConfirm } from '../helper/generalUtil';
-import { facebook } from './facebook';
-import { prompt } from 'inquirer';
 import program from 'commander';
+import { initCli, printPromotion, promptConfirm, promptIfUndefined } from '../helper/generalUtil';
+import { facebook } from './facebook';
+import { google } from './google';
 
 export const authCommand = (program: program.Command) => {
 	program
@@ -24,16 +23,18 @@ export const authCommand = (program: program.Command) => {
 
 			if (!options.skipFacebook) {
 				if (await promptConfirm('Do you want to configure Facebook Auth?')) {
-					const facebookId = await promptIfUndefined(
-						'Enter the FacebookId (https://developers.facebook.com/docs/facebook-login/ios): ',
-						options.facebookId
-					);
-					const facebookName = await promptIfUndefined('Enter the FacebookAppName:', options.facebookName);
+					const facebookId = await promptIfUndefined({
+						message: 'Enter the FacebookId (https://developers.facebook.com/docs/facebook-login/ios): ',
+						value: options.facebookId,
+					});
+					const facebookName = await promptIfUndefined({ message: 'Enter the FacebookAppName:', value: options.facebookName });
 
 					await facebook(directory, facebookName, facebookId);
 
 					console.log('Facebook auth configured');
 				}
 			}
+
+			printPromotion();
 		});
 };

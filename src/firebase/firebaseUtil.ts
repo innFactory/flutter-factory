@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
-import { resolve } from 'path';
 import { writeFileSync } from 'fs';
 import { prompt } from 'inquirer';
+import { resolve } from 'path';
 
 export const getProjects = () => {
 	const projects = execSync(`firebase projects:list`, { stdio: 'pipe' }).toString();

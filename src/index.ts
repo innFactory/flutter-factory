@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-
-import { firebaseCommand } from './firebase';
 import { authCommand } from './auth';
+import { firebaseCommand } from './firebase';
 import { renameCommand } from './rename';
 
 program

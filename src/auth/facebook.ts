@@ -1,6 +1,5 @@
 import { red } from 'chalk';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { prompt } from 'inquirer';
 import { resolve } from 'path';
 import plist from 'plist';
 import { exit } from 'process';

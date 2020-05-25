@@ -1,9 +1,9 @@
-import { exit } from 'process';
-import { initCli } from '../helper/generalUtil';
-import { promptProject } from './firebaseUtil';
-import { android } from './android';
-import { ios } from './ios';
 import program from 'commander';
+import { exit } from 'process';
+import { initCli, printPromotion } from '../helper/generalUtil';
+import { android } from './android';
+import { promptProject } from './firebaseUtil';
+import { ios } from './ios';
 // import { androidCommand } from ('./android')
 // import { iosCommand } from ('./ios')
 
@@ -38,5 +38,6 @@ export const firebaseCommand = (program: program.Command) => {
 			if (!options.skipIos) {
 				await ios(projectId, directory, options.iosName, options.iosBundle, options.iosAppstore, pubspec.name);
 			}
+			printPromotion();
 		});
 };

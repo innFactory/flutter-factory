@@ -1,18 +1,36 @@
-import { isFlutterProject, readPubspec } from './flutterUtil';
-import chalk from 'chalk';
+import { red, white } from 'chalk';
 import figlet from 'figlet';
 import { prompt } from 'inquirer';
-import { exit, cwd } from 'process';
 import { resolve } from 'path';
+import { cwd, exit } from 'process';
+import { isFlutterProject, readPubspec } from './flutterUtil';
 
 export const printLogo = () => {
-	console.log(chalk.white(figlet.textSync('FlutterFactory', { horizontalLayout: 'full' })));
-	console.log(chalk.red('by innFactory\n'));
+	console.log(white(figlet.textSync('FlutterFactory', { horizontalLayout: 'full' })));
+	console.log(red('by innFactory\n'));
 };
 
-export const promptIfUndefined = async (message: string, value: string, def?: string, optional?: boolean, validate?: (inp: string) => boolean) => {
+export const printPromotion = () => {
+	console.log('');
+	console.log(`❤️ If this cli helped you consider giving it a ⭐ on https://github.com/innfactory/flutter-factory`);
+	console.log('');
+};
+
+export const promptIfUndefined = async ({
+	message,
+	value,
+	def,
+	optional = false,
+	validate,
+}: {
+	message: string;
+	value: string;
+	def?: string;
+	optional?: boolean;
+	validate?: (inp: string) => boolean;
+}) => {
 	if (value === undefined) {
-		value = (
+		return (
 			await prompt([
 				{
 					name: 'value',

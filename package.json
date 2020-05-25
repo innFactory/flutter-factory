@@ -33,6 +33,8 @@
 	"dependencies": {
 		"chalk": "^4.0.0",
 		"commander": "^5.1.0",
+		"escape-string-regexp": "^4.0.0",
+		"fdir": "^3.4.2",
 		"figlet": "^1.4.0",
 		"inquirer": "^7.1.0",
 		"js-yaml": "^3.13.1",

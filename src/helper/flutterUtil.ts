@@ -1,6 +1,8 @@
-import { readFileSync, existsSync } from 'fs';
+import fdir from 'fdir';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { safeLoad } from 'js-yaml';
 import { resolve } from 'path';
+import { RenameInfo } from '../rename';
 
 export const isFlutterProject = (directory: string) => {
 	return existsSync(resolve(directory, './pubspec.yaml'));
@@ -22,4 +24,21 @@ export const readPubspec = (directory: string): Pubspec => {
 		name: name,
 		description: description,
 	};
+};
+
+export const getFlutterChangeFiles = (directory: string): string[] => {
+	return [resolve(directory, './pubspec.yaml'), ...(new fdir().glob('./**/*.dart').withFullPaths().crawl(resolve(directory, './lib/')).sync() as string[])];
+};
+
+export const renameFlutter = (changeFiles: string[], renameInfo: RenameInfo) => {
+	for (const path of changeFiles) {
+		if (path.endsWith('.dart')) {
+			const file = readFileSync(path, 'utf-8').replace(new RegExp(`package:${renameInfo.oldName}`, 'g'), `package:${renameInfo.newName}`);
+			writeFileSync(path, file);
+		}
+		if (path.endsWith('pubspec.yaml')) {
+			const file = readFileSync(path, 'utf-8').replace(new RegExp(`name: ${renameInfo.oldName}`, 'g'), `name: ${renameInfo.newName}`);
+			writeFileSync(path, file);
+		}
+	}
 };
