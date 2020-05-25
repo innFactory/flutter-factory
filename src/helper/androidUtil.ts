@@ -72,10 +72,14 @@ const getRenameFiles = async (androidDirectory: string, oldPackageName: string, 
 		const javaFiles = readdirSync(oldJavaPath);
 
 		for (const file of javaFiles) {
-			renameFiles.push({
-				oldPath: resolve(oldJavaPath, file),
-				newPath: resolve(newJavaPath, file),
-			});
+			const oldPath = resolve(oldJavaPath, file);
+			const newPath = resolve(newJavaPath, file);
+
+			if (oldPath !== newPath)
+				renameFiles.push({
+					oldPath,
+					newPath,
+				});
 		}
 	}
 
@@ -83,14 +87,18 @@ const getRenameFiles = async (androidDirectory: string, oldPackageName: string, 
 	const oldKotlinPath = resolve(androidDirectory, './app/src/main/kotlin/', oldPackageAsPath);
 	const newKotlinPath = resolve(androidDirectory, './app/src/main/kotlin/', newPackageAsPath);
 	if (existsSync(oldKotlinPath)) {
-		kotlinFilesFound = true;
 		const kotlinFiles = readdirSync(resolve(androidDirectory, './app/src/main/kotlin/' + oldPackageName.replace(/\./g, '/')));
+		kotlinFilesFound = true;
 
 		for (const file of kotlinFiles) {
-			renameFiles.push({
-				oldPath: resolve(oldKotlinPath, file),
-				newPath: resolve(newKotlinPath, file),
-			});
+			const oldPath = resolve(oldKotlinPath, file);
+			const newPath = resolve(newKotlinPath, file);
+
+			if (oldPath !== newPath)
+				renameFiles.push({
+					oldPath,
+					newPath,
+				});
 		}
 	}
 
@@ -133,8 +141,8 @@ export const renameAndroid = ({
 	newAndroidPackage,
 }: AndroidRenameInfo & RenameInfo) => {
 	// Java and Kotlin files
-	if (javaFilesFound) mkdirSync(newJavaPath);
-	if (kotlinFilesFound) mkdirSync(newKotlinPath);
+	if (javaFilesFound && !existsSync(newJavaPath)) mkdirSync(newJavaPath);
+	if (kotlinFilesFound && !existsSync(newKotlinPath)) mkdirSync(newKotlinPath);
 
 	const androidPackageRegexp = new RegExp(escapeStringRegexp(oldAndroidPackage), 'g');
 
@@ -147,8 +155,8 @@ export const renameAndroid = ({
 		writeFileSync(renameFile.newPath, file);
 	}
 
-	if (javaFilesFound) rimraf.sync(oldJavaPath);
-	if (kotlinFilesFound) rimraf.sync(oldKotlinPath);
+	if (javaFilesFound && !(newJavaPath === oldJavaPath)) rimraf.sync(oldJavaPath);
+	if (kotlinFilesFound && !(newKotlinPath === oldKotlinPath)) rimraf.sync(oldKotlinPath);
 
 	for (const changeFile of changeFiles) {
 		let file = readFileSync(changeFile, 'utf-8').replace(androidPackageRegexp, newAndroidPackage);

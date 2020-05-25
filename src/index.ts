@@ -4,6 +4,7 @@ import program from 'commander';
 import { authCommand } from './auth';
 import { firebaseCommand } from './firebase';
 import { renameCommand } from './rename';
+import { createCommand } from './create';
 
 program
 	.storeOptionsAsProperties(false)
@@ -15,5 +16,6 @@ program
 firebaseCommand(program);
 authCommand(program);
 renameCommand(program);
+createCommand(program);
 
 program.parse(process.argv);

@@ -12,7 +12,7 @@ export const printLogo = () => {
 
 export const printPromotion = () => {
 	console.log('');
-	console.log(`❤️ If this cli helped you consider giving it a ⭐ on https://github.com/innfactory/flutter-factory`);
+	console.log(`❤️  If this cli helped you consider giving it a ⭐ on https://github.com/innfactory/flutter-factory`);
 	console.log('');
 };
 
@@ -60,8 +60,6 @@ export const promptConfirm = async (message: string) => {
 
 export const initCli = (path: string) => {
 	const directory = path !== undefined ? resolve(path) : cwd();
-
-	console.log(directory);
 
 	if (!isFlutterProject(directory)) {
 		console.error('Must be run in a Flutter project directory.');
