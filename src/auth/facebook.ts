@@ -91,7 +91,7 @@ export const facebook = async (directory: string, facebookName: string, facebook
 		console.error(red(`strings.xml not found. Creating...`));
 		writeFileSync(stringsPath, '<?xml version="1.0" encoding="utf-8" ?><resources></resources>');
 	}
-	const stringsXml = await xml2js.parseStringPromise(readFileSync(stringsPath, 'utf8')).catch(() => {
+	let stringsXml = await xml2js.parseStringPromise(readFileSync(stringsPath, 'utf8')).catch(() => {
 		console.error(`Failed to load ${stringsPath}.`);
 		process.exit(1);
 	});
@@ -114,6 +114,17 @@ export const facebook = async (directory: string, facebookName: string, facebook
 			pushToArray(strings, { _: `fb${facebookId}`, $: { name: 'fb_login_protocol_scheme' } }, nameCompare);
 		}
 	}
+	let resources =
+		stringsXml['resources'] === ''
+			? {
+					string: [],
+			  }
+			: stringsXml['resources'];
+	resources['string'] = strings;
+	stringsXml['resources'] = resources;
+
+	const xmlBuilder = new xml2js.Builder();
+	writeFileSync(stringsPath, xmlBuilder.buildObject(stringsXml));
 
 	/**
 	 * IOS
