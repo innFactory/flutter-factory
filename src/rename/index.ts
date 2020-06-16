@@ -75,14 +75,14 @@ export const renameAction = async (
 
 	const newName = await promptIfUndefined({ message: 'New name:', value: optionsName, def: pubspec.name });
 	const newAndroidPackage = await promptIfUndefined({
-		message: 'New Android package name:',
+		message: 'New Android package name: (e.g. com.example.app)',
 		value: optionsAndroidPackage,
 		def: androidPackage,
 		optional: false,
 		validate: (inp) => javaPackageRegex.test(inp),
 	});
 	const newIosBundle = await promptIfUndefined({
-		message: 'New Ios Bundle identifier:',
+		message: 'New Ios Bundle identifier: (e.g. com.example.app)',
 		def: iosBundle,
 		value: optionsIosBundle,
 	});

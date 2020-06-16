@@ -1,6 +1,6 @@
 import { red } from 'chalk';
 import escapeStringRegexp from 'escape-string-regexp';
-import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync, mkdir } from 'fs';
 import { prompt } from 'inquirer';
 import { resolve } from 'path';
 import { exit } from 'process';
@@ -147,6 +147,11 @@ export const renameAndroid = ({
 	const androidPackageRegexp = new RegExp(escapeStringRegexp(oldAndroidPackage), 'g');
 
 	for (const renameFile of renameFiles) {
+		// Create target directory if it doesn't exist
+		if (!existsSync(renameFile.newPath)) {
+			mkdirSync(renameFile.newPath);
+		}
+
 		// Move file
 		renameSync(renameFile.oldPath, renameFile.newPath);
 

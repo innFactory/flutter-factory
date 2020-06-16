@@ -1,5 +1,5 @@
 import program from 'commander';
-import { exit, cwd } from 'process';
+import { cwd } from 'process';
 import { promptIfUndefined, printLogo } from '../helper/generalUtil';
 import { javaPackageRegex, renameAction } from '../rename';
 import { resolve, relative } from 'path';
