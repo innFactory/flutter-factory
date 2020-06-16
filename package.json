@@ -4,14 +4,12 @@
 	"description": "A CLI Helper utility for Flutter Projects.",
 	"main": "./src/index.js",
 	"bin": {
-		"flf": "./src/index.js",
-		"flutter-factory": "./src/index.js"
+		"flf": "./lib/index.js",
+		"flutter-factory": "./lib/index.js"
 	},
 	"scripts": {
 		"start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-		"create": "npm run build && npm run test",
 		"build": "tsc -p .",
-		"test": "sudo npm i -g && pizza",
 		"refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
 	},
 	"repository": {
