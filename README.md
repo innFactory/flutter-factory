@@ -5,7 +5,7 @@ flutter-factory provides a few useful commands to help you create, configure or 
 
 `npm i -g flutter-factory`
 
-Now you can the cli like so:
+Now you can run the cli like so:
 - `flutter-factory [options] [command]`
 - `flf [options] [command]`
 
