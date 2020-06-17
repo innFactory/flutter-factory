@@ -3,11 +3,11 @@
 ## Getting started
 flutter-factory provides a few useful commands to help you create, configure or refactor a Flutter project. To install the cli tool globally run
 
-`npm i -g flutter-factory`
+`$ npm i -g flutter-factory`
 
 Now you can run the cli like so:
-- `flutter-factory [options] [command]`
-- `flf [options] [command]`
+- `$ flutter-factory [options] [command]`
+- `$ flf [options] [command]`
 
 ## Commands
 Every command has an interactive mode as well as cli options.
@@ -19,7 +19,7 @@ There are also general options that can be used with every command:
 
 ___
 
-`flf create [options]` Create Flutter project from [flutter-factory template](https://github.com/innfactory/flutter-factory-templates).
+`$ flf create [options]` Create Flutter project from [flutter-factory template](https://github.com/innfactory/flutter-factory-templates).
 
 Options:
   - `-n --name <name>` The name of the Android & IOS App
@@ -28,7 +28,7 @@ Options:
 
 ___
 
-`flf auth [options]` Configure Auth Settings for [google_sign_in](https://pub.dev/packages/google_sign_in) and [flutter_facebook_login](https://pub.dev/packages/flutter_facebook_login)
+`$ flf auth [options]` Configure Auth Settings for [google_sign_in](https://pub.dev/packages/google_sign_in) and [flutter_facebook_login](https://pub.dev/packages/flutter_facebook_login)
 
 Options:
   - `-sg --skip-google` Skip google auth configuration
@@ -38,7 +38,7 @@ Options:
 
 ___
 
-`flf rename [options]` Rename Flutter project including Ios and Android app.
+`$ flf rename [options]` Rename Flutter project including Ios and Android app.
 
 Options:
   - `-n --name <name>` The name of the Android & IOS App
@@ -47,7 +47,7 @@ Options:
 
 ___
 
-`flf firebase [options]` Create Ios and Android Firebase app and download configuration files.
+`$ flf firebase [options]` Create Ios and Android Firebase app and download configuration files.
 
 Options:
   - `-f --firebase <name>` The name of the Firebase project
@@ -61,7 +61,7 @@ Options:
 
 ___
 
-`flf help` Display help for command
+`$ flf help` Display help for command
 
 ___
 
@@ -77,15 +77,19 @@ To build your current development version use `npm run build`
 
 If you want to globally link your local development instance you first have to uninstall the release version with
 
-`npm rm -g flutter-factory`
+`$ npm rm -g flutter-factory`
 
-This gives you access to the "flf" and "flutter-factory" commands globally linked to your current build of the cli
+and then you can run the following command in the root directory of the cloned repository.
+
+`$ npm link`
+
+ This gives you access to the "flf" and "flutter-factory" commands globally linked to your current build of the cli
 
 ### Alternative
 
 Otherwise you can also run the cli from its folder with
 
-`ts-node src/index.ts [options] [command]`
+`$ ts-node src/index.ts [options] [command]`
 
 ___
 
