@@ -126,7 +126,9 @@ export const downloadAndroidConfiguration = (directory: string, appId: string) =
 export const createIosApp = (projectId: string, bundleIdentifier: string, appName: string, appStoreId: string) => {
 	try {
 		const result = execSync(
-			`firebase apps:create -b ${bundleIdentifier} ${appStoreId != '' ? '-s ' + appStoreId : ''} --project ${projectId} --non-interactive IOS ${appName}`,
+			`firebase apps:create -b ${bundleIdentifier} ${
+				appStoreId !== undefined ? '-s ' + appStoreId : ''
+			} --project ${projectId} --non-interactive IOS ${appName}`,
 			{ stdio: 'pipe' }
 		);
 		return result.toString().match(RegExp(/\d:\d{12}:ios:[a-z\d]{22}/))?.[0] || 'error';
