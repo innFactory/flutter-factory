@@ -24,12 +24,17 @@ export const firebaseCommand = (program: program.Command) => {
 
 			if (options.skipAndroid && options.skipIos) {
 				console.error("You can't skip both the Ios and Android app creation.");
-				exit();
+				exit(1);
 			}
 
 			console.log(`You're about to add a Firebase project to "${pubspec.name}".\n`);
 
 			const projectId = options.firebase !== undefined ? options.firebase : await promptProject();
+
+			if (projectId == null) {
+				console.error('Something went wrong while selecting a firebase project. Make sure you have the firebase-cli installed and authenticated.');
+				exit(1);
+			}
 
 			if (!options.skipAndroid) {
 				await android(projectId, directory, options.androidName, options.androidPackage, pubspec.name);
@@ -38,6 +43,7 @@ export const firebaseCommand = (program: program.Command) => {
 			if (!options.skipIos) {
 				await ios(projectId, directory, options.iosName, options.iosBundle, options.iosAppstore, pubspec.name);
 			}
+
 			printPromotion();
 		});
 };

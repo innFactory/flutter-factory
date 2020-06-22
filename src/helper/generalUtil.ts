@@ -63,7 +63,7 @@ export const initCli = (path: string) => {
 
 	if (!isFlutterProject(directory)) {
 		console.error('Must be run in a Flutter project directory.');
-		exit();
+		exit(1);
 	}
 
 	const pubspec = readPubspec(directory);

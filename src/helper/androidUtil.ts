@@ -141,17 +141,12 @@ export const renameAndroid = ({
 	newAndroidPackage,
 }: AndroidRenameInfo & RenameInfo) => {
 	// Java and Kotlin files
-	if (javaFilesFound && !existsSync(newJavaPath)) mkdirSync(newJavaPath);
-	if (kotlinFilesFound && !existsSync(newKotlinPath)) mkdirSync(newKotlinPath);
+	if (javaFilesFound && !existsSync(newJavaPath)) mkdirSync(newJavaPath, { recursive: true });
+	if (kotlinFilesFound && !existsSync(newKotlinPath)) mkdirSync(newKotlinPath, { recursive: true });
 
 	const androidPackageRegexp = new RegExp(escapeStringRegexp(oldAndroidPackage), 'g');
 
 	for (const renameFile of renameFiles) {
-		// Create target directory if it doesn't exist
-		if (!existsSync(renameFile.newPath)) {
-			mkdirSync(renameFile.newPath);
-		}
-
 		// Move file
 		renameSync(renameFile.oldPath, renameFile.newPath);
 

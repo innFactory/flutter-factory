@@ -1,7 +1,11 @@
 # flutter-factory
 
 ## Getting started
-flutter-factory provides a few useful commands to help you create, configure or refactor a Flutter project. To install the cli tool globally run
+flutter-factory provides a few useful commands to help you create, configure or refactor a Flutter project.
+
+This cli requires [firebase-tools](https://www.npmjs.com/package/firebase-tools) to be installed and authenticated with a Firebase account.
+
+To install the cli tool globally run
 
 `$ npm i -g flutter-factory`
 
