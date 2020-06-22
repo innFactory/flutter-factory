@@ -77,6 +77,8 @@ To get started developing this cli clone the development branch.
 ### Building
 To build your current development version use `npm run build`
 
+To build and watch your current development version use `npm run start`
+
 ### Globally link local development version
 
 If you want to globally link your local development instance you first have to uninstall the release version with
