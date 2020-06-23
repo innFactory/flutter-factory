@@ -3,10 +3,14 @@ import { exit } from 'process';
 import { promptIfUndefined, promptConfirm } from '../helper/generalUtil';
 import { createAndroidApp, downloadAndroidConfiguration, getApps, promptApp } from './firebaseUtil';
 
-export const android = async (projectId: string, directory: string, _androidName: string, _androidPackage: string, appName: string) => {
+export const android = async (projectId: string, directory: string, appName: string, _androidName?: string, _androidPackage?: string) => {
 	if (await promptConfirm('Do you want to create a new Firebase Android App? (No to choose an existing one)')) {
-		const androidName = await promptIfUndefined({ message: 'What is the name for the Android app?', value: _androidName, def: appName });
-		const androidPackage = await promptIfUndefined({ message: 'What is the Android package name?', value: _androidPackage, def: 'com.example.app' });
+		const androidName = await promptIfUndefined({ message: 'What is the name for the Android app?', value: _androidName ?? '', def: appName });
+		const androidPackage = await promptIfUndefined({
+			message: 'What is the Android package name?',
+			value: _androidPackage ?? '',
+			def: 'com.example.app',
+		});
 
 		process.stdout.write('Creating Android app... ');
 		const androidAppId = createAndroidApp(projectId, androidPackage, androidName);

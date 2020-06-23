@@ -3,11 +3,11 @@ import { exit } from 'process';
 import { promptIfUndefined, promptConfirm } from '../helper/generalUtil';
 import { createIosApp, downloadIosConfiguration, getApps, promptApp } from './firebaseUtil';
 
-export const ios = async (projectId: string, directory: string, _iosName: string, _iosBundle: string, _iosAppstore: string, appName: string) => {
+export const ios = async (projectId: string, directory: string, appName: string, _iosName?: string, _iosBundle?: string, _iosAppstore?: string) => {
 	if (await promptConfirm('Do you want to create a new Firebase IOS App? (No to choose an existing one)')) {
-		const iosName = await promptIfUndefined({ message: 'What is the name for the Ios app?', value: _iosName, def: appName });
-		const iosBundle = await promptIfUndefined({ message: 'What is the Ios bundle identifier?', value: _iosBundle, def: 'com.example.app' });
-		const iosAppstore = await promptIfUndefined({ message: 'What is the Ios Appstore identifier?', value: _iosAppstore, optional: true });
+		const iosName = await promptIfUndefined({ message: 'What is the name for the Ios app?', value: _iosName ?? '', def: appName });
+		const iosBundle = await promptIfUndefined({ message: 'What is the Ios bundle identifier?', value: _iosBundle ?? '', def: 'com.example.app' });
+		const iosAppstore = await promptIfUndefined({ message: 'What is the Ios Appstore identifier?', value: _iosAppstore ?? '', optional: true });
 
 		process.stdout.write('Creating Ios app... ');
 		const iosAppId = createIosApp(projectId, iosBundle, iosName, iosAppstore);

@@ -131,7 +131,7 @@ export const renameAction = async (
 		console.log(`Running "${cmd}" now.`);
 		execSync(cmd, { stdio: 'inherit' });
 
-		printPromotion();
+		if (isRename) printPromotion();
 	}
 };
 

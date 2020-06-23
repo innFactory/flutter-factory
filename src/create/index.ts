@@ -7,6 +7,7 @@ import { readPubspec, isFlutterProject } from '../helper/flutterUtil';
 import { execSync, spawnSync } from 'child_process';
 import rimraf from 'rimraf';
 import { existsSync } from 'fs';
+import { firebaseAction } from '../firebase';
 
 export const createCommand = (program: program.Command) => {
 	program
@@ -64,6 +65,15 @@ export const createCommand = (program: program.Command) => {
 				optionsName: name,
 				optionsAndroidPackage: androidPackage,
 				optionsIosBundle: iosBundle,
+			});
+
+			await firebaseAction(targetDir, pubspec, {
+				androidName: name,
+				skipAndroid: false,
+				androidPackage: androidPackage,
+				skipIos: false,
+				iosName: name,
+				iosBundle: iosBundle,
 			});
 		});
 };
