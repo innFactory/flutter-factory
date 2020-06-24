@@ -38,7 +38,7 @@ const downloadGoogleServices = (directory: string, appId: string) => {
 		console.error('Failed to download GoogleService-Info.plist.');
 		exit(1);
 	}
-	console.log('Done');
+	console.log('Done\n');
 	console.log(
 		`Downloaded GoogleService-Info.plist to ${resolve(
 			directory,

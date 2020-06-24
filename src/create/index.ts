@@ -30,6 +30,7 @@ export const createCommand = (program: program.Command) => {
 				message: 'Ios Bundle identifier (com.example.app):',
 				value: options.iosBundle,
 				validate: (inp) => /^[a-z0-9-]+(.[a-z0-9-]+)*/i.test(inp),
+				def: androidPackage,
 			});
 
 			const targetDirName = name.replace(new RegExp(/([^a-zA-Z0-9\-\_]+)/gi), '_').toLocaleLowerCase();
@@ -54,7 +55,7 @@ export const createCommand = (program: program.Command) => {
 			}
 			console.log('Done');
 
-			const pubspec = readPubspec(targetDir);
+			let pubspec = readPubspec(targetDir);
 			if (!isFlutterProject(targetDir)) {
 				console.error('pubspec.yaml not found. Something went wrong.');
 				exit(1);
@@ -66,6 +67,8 @@ export const createCommand = (program: program.Command) => {
 				optionsAndroidPackage: androidPackage,
 				optionsIosBundle: iosBundle,
 			});
+
+			pubspec = readPubspec(targetDir);
 
 			await firebaseAction(targetDir, pubspec, {
 				androidName: name,

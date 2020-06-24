@@ -127,7 +127,7 @@ export const createIosApp = (projectId: string, bundleIdentifier: string, appNam
 	try {
 		const result = execSync(
 			`firebase apps:create -b ${bundleIdentifier} ${
-				appStoreId !== undefined ? '-s ' + appStoreId : ''
+				appStoreId !== undefined && appStoreId != null && appStoreId != '' ? '-s ' + appStoreId : ''
 			} --project ${projectId} --non-interactive IOS ${appName}`,
 			{ stdio: 'pipe' }
 		);
