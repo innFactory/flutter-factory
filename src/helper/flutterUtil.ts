@@ -33,11 +33,11 @@ export const getFlutterChangeFiles = (directory: string): string[] => {
 export const renameFlutter = (changeFiles: string[], renameInfo: RenameInfo) => {
 	for (const path of changeFiles) {
 		if (path.endsWith('.dart')) {
-			const file = readFileSync(path, 'utf-8').replace(new RegExp(`package:${renameInfo.oldName}`, 'g'), `package:${renameInfo.newName}`);
+			const file = readFileSync(path, 'utf-8').replace(new RegExp(`package:${renameInfo.oldName}`, 'g'), `package:${renameInfo.newFlutterName}`);
 			writeFileSync(path, file);
 		}
 		if (path.endsWith('pubspec.yaml')) {
-			const file = readFileSync(path, 'utf-8').replace(new RegExp(`name: ${renameInfo.oldName}`, 'g'), `name: ${renameInfo.newName}`);
+			const file = readFileSync(path, 'utf-8').replace(new RegExp(`name: ${renameInfo.oldName}`, 'g'), `name: ${renameInfo.newFlutterName}`);
 			writeFileSync(path, file);
 		}
 	}

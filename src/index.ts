@@ -9,7 +9,7 @@ import { createCommand } from './create';
 program
 	.storeOptionsAsProperties(false)
 	.passCommandToAction(false)
-	.version('0.0.1')
+	.version('0.0.2')
 	.description('A CLI Helper utility for Flutter Projects.')
 	.option('-p --path <path>', 'The Flutter project path');
 

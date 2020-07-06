@@ -24,7 +24,7 @@ export const promptIfUndefined = async ({
 	validate,
 }: {
 	message: string;
-	value: string;
+	value: string | undefined;
 	def?: string;
 	optional?: boolean;
 	validate?: (inp: string) => boolean;

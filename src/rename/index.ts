@@ -15,6 +15,7 @@ export interface RenameFile {
 
 export interface RenameInfo {
 	oldName: string;
+	newFlutterName: string;
 	newName: string;
 	oldAndroidPackage: string;
 	newAndroidPackage: string;
@@ -27,6 +28,7 @@ export const renameCommand = (program: program.Command) => {
 		.command('rename')
 		.description('Rename Flutter project including Ios and Android app.')
 		.option('-n --name <name>', 'The name of the Android & IOS App')
+		.option('-fn --fluter-name <name>', 'The name of the Flutter App (Dart package)')
 		.option('-ap --android-package <name>', 'The Android package name')
 		.option('-ib --ios-bundle <name>', 'The Ios bundle name')
 		.action(async (options) => {
@@ -35,6 +37,7 @@ export const renameCommand = (program: program.Command) => {
 			await renameAction(directory, pubspec, {
 				isRename: true,
 				optionsName: options.name,
+				optionsFlutterName: options.flutterName,
 				optionsAndroidPackage: options.androidPackage,
 				optionsIosBundle: options.iosBundle,
 			});
@@ -48,11 +51,13 @@ export const renameAction = async (
 	{
 		isRename,
 		optionsName,
+		optionsFlutterName,
 		optionsAndroidPackage,
 		optionsIosBundle,
 	}: {
 		isRename: boolean;
 		optionsName: string;
+		optionsFlutterName: string;
 		optionsAndroidPackage: string;
 		optionsIosBundle: string;
 	}
@@ -74,6 +79,12 @@ export const renameAction = async (
 	}
 
 	const newName = await promptIfUndefined({ message: 'New name:', value: optionsName, def: pubspec.name });
+	const newFlutterName: string = await promptIfUndefined({
+		message: 'New Flutter project name:',
+		value: /[a-zA-Z0-9_]/.test(optionsFlutterName) ? optionsFlutterName : undefined,
+		validate: (inp) => /[a-z0-9_]+/.test(inp),
+		def: newName.toLowerCase().replace(' ', '_').replace(/\W/, ''),
+	});
 	const newAndroidPackage = await promptIfUndefined({
 		message: 'New Android package name: (e.g. com.example.app)',
 		value: optionsAndroidPackage,
@@ -89,6 +100,7 @@ export const renameAction = async (
 
 	const renameInfo: RenameInfo = {
 		oldName: pubspec.name,
+		newFlutterName: newFlutterName,
 		newName: newName,
 		oldAndroidPackage: androidPackage,
 		newAndroidPackage: newAndroidPackage,
@@ -123,6 +135,7 @@ export const renameAction = async (
 		if (directory !== currentDirectory) {
 			const toProject = relative(currentDirectory, directory);
 			const toCwd = relative(directory, currentDirectory);
+
 			cmd = `cd ${toProject} && flutter pub get && flutter clean && cd ${toCwd}`;
 		} else {
 			cmd = 'flutter pub get && flutter clean';
