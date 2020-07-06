@@ -23,7 +23,24 @@ There are also general options that can be used with every command:
 
 ___
 
+
+### Creating a new Flutter project
+
 `$ flf create [options]` Create Flutter project from [flutter-factory template](https://github.com/innfactory/flutter-factory-templates).
+
+This command clones the [flutter-factory template](https://github.com/innfactory/flutter-factory-templates) repository and lets you configure the name, android package, ios bundle and firebase configuration through an interactive process.
+
+Options:
+  - `-n --name <name>` The name of the Android & IOS App
+  - `-fn flutter-name <name>` The name of the Flutter App (Dart package)
+  - `-ap --android-package <name>` The Android package name
+  - `-ib --ios-bundle <name>` The Ios bundle name
+
+___
+
+### Other useful commands
+
+`$ flf rename [options]` Rename Flutter project including Ios and Android app.
 
 Options:
   - `-n --name <name>` The name of the Android & IOS App
@@ -39,15 +56,6 @@ Options:
   - `-sf --skip-facebook` Skip facebook auth configuration
   - `-fi --facebook-id <id>` Facebook Auth id
   - `-fn --facebook-name <name>` Facebook Auth name
-
-___
-
-`$ flf rename [options]` Rename Flutter project including Ios and Android app.
-
-Options:
-  - `-n --name <name>` The name of the Android & IOS App
-  - `-ap --android-package <name>` The Android package name
-  - `-ib --ios-bundle <name>` The Ios bundle name
 
 ___
 
