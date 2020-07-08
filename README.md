@@ -32,7 +32,7 @@ This command clones the [flutter-factory template](https://github.com/innfactory
 
 Options:
   - `-n --name <name>` The name of the Android & IOS App
-  - `-fn flutter-name <name>` The name of the Flutter App (Dart package)
+  - `-fn --flutter-name <name>` The name of the Flutter App (Dart package)
   - `-ap --android-package <name>` The Android package name
   - `-ib --ios-bundle <name>` The Ios bundle name
 
@@ -44,6 +44,7 @@ ___
 
 Options:
   - `-n --name <name>` The name of the Android & IOS App
+  - `-fn --flutter-name <name>` The name of the Flutter App (Dart package)
   - `-ap --android-package <name>` The Android package name
   - `-ib --ios-bundle <name>` The Ios bundle name
 
