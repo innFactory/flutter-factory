@@ -111,4 +111,4 @@ ___
 ## Contributors
 <a href="https://github.com/DevNico"><img src="https://avatars1.githubusercontent.com/u/24965872?&v=3" title="DevNico" width="80" height="80"></a>
 
-Powered by [innFactory](https://innfactory.de/)
+Powered by [innFactory](https://innfactory.de/) read about the [flutter factory (DE)](https://innfactory.de/softwareentwicklung/ui-ux/flutter-factory-eine-cli-zur-erstellung-von-flutter-projekten) [(EN)](#)
