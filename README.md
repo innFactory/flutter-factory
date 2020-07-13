@@ -1,4 +1,4 @@
-# flutter-factory
+![flutter-factory](https://innfactory.de/wp-content/uploads/2020/07/flutter-factory-logo-wide.png "flutter-factory")
 
 ## Getting started
 flutter-factory provides a few useful commands to help you create, configure or refactor a Flutter project.
