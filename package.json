@@ -1,0 +1,57 @@
+{
+	"name": "flutter_factory",
+	"version": "1.0.0",
+	"description": "A CLI Helper utility for Flutter Projects.",
+	"main": "./src/index.js",
+	"bin": {
+		"flf": "./lib/index.js",
+		"flutter-factory": "./lib/index.js"
+	},
+	"scripts": {
+		"start": "tsc -watch -p .",
+		"build": "tsc -p .",
+		"refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/innfactory/flutter-factory.git"
+	},
+	"keywords": [
+		"CLI",
+		"Flutter",
+		"Firebase",
+		"Commander.js"
+	],
+	"author": "Nicolas Schlecker",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/innfactory/flutter-factory/issues"
+	},
+	"homepage": "https://github.com/innfactory/flutter-factory#readme",
+	"dependencies": {
+		"chalk": "^4.0.0",
+		"commander": "^5.1.0",
+		"escape-string-regexp": "^4.0.0",
+		"fdir": "^3.4.2",
+		"figlet": "^1.4.0",
+		"inquirer": "^7.1.0",
+		"js-yaml": "^3.13.1",
+		"ora": "^4.0.4",
+		"path": "^0.12.7",
+		"plist": "^3.0.1",
+		"rimraf": "^3.0.2",
+		"xml2js": "^0.4.23"
+	},
+	"devDependencies": {
+		"@types/figlet": "^1.2.0",
+		"@types/inquirer": "^6.5.0",
+		"@types/js-yaml": "^3.12.4",
+		"@types/node": "^14.0.4",
+		"@types/plist": "^3.0.2",
+		"@types/rimraf": "^3.0.0",
+		"@types/xml2js": "^0.4.5",
+		"nodemon": "^2.0.4",
+		"ts-node": "^8.10.1",
+		"typescript": "^3.9.3"
+	}
+}
